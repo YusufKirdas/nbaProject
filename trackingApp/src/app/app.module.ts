@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GameDashboardComponent } from './game-dashboard/game-dashboard.component';
 import { GamesResultPageComponent } from './games-result-page/games-result-page.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { HttpclientInterceptor } from './httpclient.interceptor';
 
 @NgModule({
   declarations: [
@@ -14,9 +17,17 @@ import { GamesResultPageComponent } from './games-result-page/games-result-page.
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpclientInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

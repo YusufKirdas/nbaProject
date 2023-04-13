@@ -1,1 +1,20 @@
-<p>games-result-page works!</p>
+<div class="select-team-section">
+    <div class="game-card">
+        <div class="head">
+            <h3 class="team-head" *ngIf="selectedTeam"> {{selectedTeam.full_name}} [{{selectedTeam.abbreviation}}] </h3>
+        </div>
+        <div class="team-conference">
+            <h5 *ngIf="selectedTeam"> {{selectedTeam.conference}}ern conference </h5>
+        </div>
+        <hr>
+        <div class="game-desc">
+            <p>Score of past 12 days:</p>
+            <div class="score-list" *ngFor="let data of gameCard; let i = index;">
+                <strong>{{data.home_team.abbreviation}}</strong> {{data.home_team_score}} -
+                {{data.visitor_team_score}} <strong>{{data.visitor_team_score}}</strong>
+            </div>
+        </div>
+        <input type="button" [routerLink]="'/'"
+        value="< < Back to all teams stats" class="back-btn" [id]="'backBtn'">
+    </div>
+</div>
